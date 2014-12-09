@@ -50,11 +50,14 @@ def get_status():
     if not socket_name:
         return EmptyStatus('Can\'t connect to daemon!')
     cnn = YadConnection()
-    cnn.connect(socket_name)
-    status_request = {'method': 'status', 'params': None}
-    answer = cnn.send_with_answer(status_request)
-    return DaemonStatus(config, answer) if answer and answer['method'] == 'status' \
+    try:
+        cnn.connect(socket_name)
+        status_request = {'method': 'status', 'params': None}
+        answer = cnn.send_with_answer(status_request)
+        return DaemonStatus(config, answer) if answer and answer['method'] == 'status' \
            else EmptyStatus('Wrong daemon answer!')
+    finally:
+        cnn.close()
 
 if __name__ == '__main__':
     status = get_status()

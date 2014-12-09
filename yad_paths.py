@@ -20,6 +20,6 @@ def yad_get_daemon_socket():
 	temp_dirs = glob.glob('/tmp/yandex-disk*')
 	return os.path.join(temp_dirs[0], 'daemon') if temp_dirs else None 
 
-if __name__ == '__main__':
-	print yad_read_configuration(None)
-	print yad_get_daemon_socket()
+# if __name__ == '__main__':
+# 	print yad_read_configuration(None)
+#	print yad_get_daemon_socket()

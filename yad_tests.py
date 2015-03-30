@@ -1,17 +1,15 @@
-from yad_connection import YadConnection
+import unittest
 from yad_protocol import YadProtocol
 
-def test_protocol():
-    p = YadProtocol()
-    print p.pack_object({'a': 1, 'b': '2'})
-    print p._parse_packet_length('1')
-    print p._parse_packet_length('1 ')
-    print p._parse_packet_length('2 ')
-    print p._parse_packet_length('100 ')
-    print p._parse_packet_length('1100')
-    print p._create_packet('12')
-    print p._create_packet('{1111}')
+class TestYadProtocol(unittest.TestCase):
+
+    def test_packobject(self):
+        p = YadProtocol()
+        self.assertEqual(p.pack_object({'a': 1, 'b': '2'}), '18 {"a": 1, "b": "2"}')
+
+    def test_create_packet(self):
+        p = YadProtocol()
+        self.assertEqual(p._create_packet('test'), '4 test') 
 
 if __name__ == '__main__':
-    test_protocol()
-
+    unittest.main()

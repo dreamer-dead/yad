@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import yad_paths
 from yad_connection import YadConnection
 

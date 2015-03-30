@@ -31,9 +31,9 @@ class DaemonStatus(Status):
             self.error_path = core['core_path']
             self.error_code = core['core_error']
         else:
-            self.sync_dir = result['sync_dir'] if result.has_key('sync_dir') else config['dir']
-            self.size_status = result['size_status'] if result.has_key('size_status') else {}
-            self.quota_info = result['quota_info'] if result.has_key('quota_info') else {}
+            self.sync_dir = result.get('sync_dir', config['dir'])
+            self.size_status = result.get('size_status', {})
+            self.quota_info = result.get('quota_info', {}) 
 
     def ok(self):
         return not hasattr(self, 'error_code')
